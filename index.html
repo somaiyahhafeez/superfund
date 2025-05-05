@@ -68,7 +68,16 @@ body, a {
   font-size: 1.125rem;
   color: #2e2e2e; 
 }
-
+@media (max-width: 768px) {
+    figure img {
+        width: 100%;
+    }
+    
+    figcaption {
+        font-size: 0.85rem;
+        padding: 0 1rem;
+    }
+}
 
 p.subhead {
   color: #ffffff; 
@@ -473,8 +482,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const currentVideo = document.getElementById('current-video');
     const sourceEl = currentVideo.querySelector('source');
     const videoContainer = document.getElementById('site-video');
-
-    // Progress bar
+    
+    const isMobile = window.innerWidth < 768 || 
+                     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    const videoQuality = isMobile ? 'low' : 'high';
+    console.log(`Device detected as ${isMobile ? 'mobile' : 'desktop'}, using ${videoQuality} quality`);
+    
     function updateProgressBar() {
         const scrollPosition = window.scrollY;
         const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -482,9 +496,20 @@ document.addEventListener('DOMContentLoaded', function () {
         progressBar.style.width = `${progress}%`;
     }
 
-    // Video update based on visible section
     function updateVideoBasedOnScroll() {
-        // Find the most visible section
+        if (isMobile) {
+            const containerRect = videoContainer.getBoundingClientRect();
+            const isContainerVisible = (
+                containerRect.top < window.innerHeight &&
+                containerRect.bottom > 0
+            );
+            
+            if (!isContainerVisible) {
+                if (!currentVideo.paused) currentVideo.pause();
+                return;
+            }
+        }
+      
         let maxVisibility = 0;
         let mostVisibleSection = null;
 
@@ -496,11 +521,18 @@ document.addEventListener('DOMContentLoaded', function () {
             const visibleBottom = Math.min(window.innerHeight, rect.bottom);
             const visibleHeight = Math.max(0, visibleBottom - visibleTop);
             
-            // Weight sections near the center of the screen more heavily
-            const distanceFromCenter = Math.abs((visibleTop + visibleBottom) / 2 - window.innerHeight / 2);
-            const centralityFactor = 1 - (distanceFromCenter / (window.innerHeight / 2));
+            // Weight sections differently based on device
+            let visibility;
             
-            const visibility = visibleHeight * centralityFactor;
+            if (isMobile) {
+                const distanceFromTop = Math.max(0, rect.top);
+                const topFactor = Math.max(0, 1 - (distanceFromTop / window.innerHeight * 2));
+                visibility = visibleHeight * topFactor;
+            } else {
+                const distanceFromCenter = Math.abs((visibleTop + visibleBottom) / 2 - window.innerHeight / 2);
+                const centralityFactor = 1 - (distanceFromCenter / (window.innerHeight / 2));
+                visibility = visibleHeight * centralityFactor;
+            }
             
             if (visibility > maxVisibility) {
                 maxVisibility = visibility;
@@ -508,33 +540,31 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // If we found a visible section, update the video if needed
         if (mostVisibleSection) {
             const videoSrc = mostVisibleSection.getAttribute('data-video');
+            
             if (sourceEl.getAttribute('src') !== videoSrc) {
                 console.log("Switching to video:", videoSrc); // For debugging
                 
-                // Set display to none while loading to prevent flash of previous video
                 currentVideo.style.opacity = 0;
                 
-                // Update the video source
                 sourceEl.setAttribute('src', videoSrc);
                 
-                // Handle both MP4 and MOV formats
                 try {
                     currentVideo.load();
                     
-                    // When the video has loaded enough to play, make it visible again
                     currentVideo.oncanplay = function() {
                         currentVideo.style.opacity = 1;
-                        currentVideo.play().catch(e => {
-                            console.warn("Video play error:", e);
-                            // Show a fallback if video fails to play
-                            videoContainer.style.backgroundColor = "#000";
-                        });
+                        
+                        if (!isMobile || isElementInViewport(videoContainer)) {
+                            currentVideo.play().catch(e => {
+                                console.warn("Video play error:", e);
+                                // Show a fallback if video fails to play
+                                videoContainer.style.backgroundColor = "#000";
+                            });
+                        }
                     };
                     
-                    // Set a timeout in case the video never loads
                     setTimeout(() => {
                         if (currentVideo.style.opacity === "0") {
                             currentVideo.style.opacity = 1;
@@ -547,51 +577,84 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
+    
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.bottom >= 0
+        );
+    }
 
-    // Add CSS for smooth video transitions
     const style = document.createElement('style');
     style.textContent = `
         #current-video {
             transition: opacity 0.3s ease;
         }
+        
+        @media (max-width: 768px) {
+            .video-container {
+                height: 40vh; /* Slightly shorter on mobile */
+                margin-bottom: 1rem;
+            }
+            
+            /* Improve scrollytelling text readability on mobile */
+            .scrolly-text {
+                margin-bottom: 2rem;
+                padding: 1.25rem;
+            }
+        }
     `;
     document.head.appendChild(style);
 
-    // Log initial state for debugging
     console.log("Found scrolly sections:", scrollyTexts.length);
-    scrollyTexts.forEach(section => {
-        console.log("Section:", section.id, "Video:", section.getAttribute('data-video'));
-        
-        // Preload videos for smoother transitions
-        const videoSrc = section.getAttribute('data-video');
-        if (videoSrc) {
-            const preloadLink = document.createElement('link');
-            preloadLink.rel = 'preload';
-            preloadLink.as = 'video';
-            preloadLink.href = videoSrc;
-            document.head.appendChild(preloadLink);
-        }
-    });
+    
+    if (!isMobile) {
+        scrollyTexts.forEach(section => {
+            console.log("Section:", section.id, "Video:", section.getAttribute('data-video'));
+            
+            const videoSrc = section.getAttribute('data-video');
+            if (videoSrc) {
+                const preloadLink = document.createElement('link');
+                preloadLink.rel = 'preload';
+                preloadLink.as = 'video';
+                preloadLink.href = videoSrc;
+                document.head.appendChild(preloadLink);
+            }
+        });
+    } else {
+        scrollyTexts.forEach(section => {
+            console.log("Section:", section.id, "Video:", section.getAttribute('data-video'));
+        });
+    }
 
-    // Initial trigger
     updateProgressBar();
     
-    // Add a small delay to handle initial layout
     setTimeout(updateVideoBasedOnScroll, 500);
 
-    // Throttle scroll events for better performance
     let scrollTimeout;
     window.addEventListener('scroll', () => {
         updateProgressBar(); // Update progress bar immediately
         
-        // Throttle the expensive video update
         clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(updateVideoBasedOnScroll, 50);
+        scrollTimeout = setTimeout(updateVideoBasedOnScroll, isMobile ? 100 : 50);
     });
 
-    // Debounce resize events
+    window.addEventListener('orientationchange', function() {
+        setTimeout(updateVideoBasedOnScroll, 300);
+    });
+
     let resizeTimeout;
     window.addEventListener('resize', () => {
+        // Update mobile detection on resize
+        const wasMobile = isMobile;
+        isMobile = window.innerWidth < 768 || 
+                  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                  
+        if (wasMobile !== isMobile) {
+            console.log(`Device view changed to ${isMobile ? 'mobile' : 'desktop'}`);
+        }
+        
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
             updateProgressBar();
@@ -599,7 +662,25 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 100);
     });
 
-    // Datawrapper chart autoresize
+    if (isMobile) {
+        // IntersectionObserver to detect when video container enters/exits viewport
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (currentVideo.paused && currentVideo.readyState >= 2) {
+                        currentVideo.play().catch(e => console.warn("Video play error:", e));
+                    }
+                } else {
+                    if (!currentVideo.paused) {
+                        currentVideo.pause();
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        observer.observe(videoContainer);
+    }
+
     window.addEventListener("message", function (a) {
         if (a.data["datawrapper-height"]) {
             const e = document.querySelectorAll("iframe");
