@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Jersey's Toxic Legacy: Superfund Sites</title>
+    <style>
+        :root {
+          --primary-color: #1a5a96;
+          --secondary-color: #e63946;
+          --text-color: #333;
+          --light-text: #666;
+          --background: #f8f9fa;
+          --light-background: #fff;
+          --dark-background: #222;
+          --border-color: #eee;
+          --content-max-width: 1300px;
+          --content-padding: clamp(1rem, 5vw, 2rem);
+          --heading-line-height: 1.2;
+          --body-line-height: 1.8;
+          --transition-speed: 0.3s;
+        }
+    
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+h1, .headline {
+  font-family: 'Literata', serif;
+  font-weight: 700;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+.byline, .byline a {
+  font-family: 'Lora', serif;
+  font-weight: 400;
+  font-style: italic;
+  color: #000000; 
+  font-size: 1.1rem;
+}
+
+.date {
+  font-family: 'Literata', serif;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 1rem;
+  color: #333;
+}
+
+body, p {
+  font-family: 'Lora', serif;
+  font-weight: 400;
+  line-height: 1.75;
+  font-size: 1.125rem;
+  color: #2e2e2e; 
+}
+body, a {
+  font-family: 'Lora', serif;
+  font-weight: 400;
+  line-height: 1.75;
+  font-size: 1.125rem;
+  color: #2e2e2e; 
+}
+
+
+p.subhead {
+  color: #ffffff; 
+}
+
+
+        body {
+            background-color: #f5f5f7;
+            color: #333;
+            line-height: 1.6;
+        }
+        .banner {
+            position: relative;
+            background: url('images/superfund.webp') no-repeat center center;
+            background-size: cover;
+            height: 500px;
+            width: 100%;
+        }
+
+        .banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);
+        }
+
+        .banner-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            color: white;
+            padding: 2rem var(--content-padding);
+            max-width: var(--content-max-width);
+            margin: 0 auto;
+        }
+
+        .banner-content h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: var(--heading-line-height);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .banner-content .subhead {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            line-height: 1.4;
+            margin-bottom: 1rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            max-width: 90%;
+        }
+
+
+
+        .byline {
+            font-size: 1rem;
+            font-style: italic;
+            margin-top: 1rem;
+            color: rgb(0, 0, 0);
+        }
+        .byline-a {
+            color: rgb(0, 0, 0);
+        }
+
+        .main-container {
+            max-width: var(--content-max-width);
+            margin: 0 auto;
+            padding: 0 var(--content-padding);
+        }
+
+        .content-section {
+            max-width: var(--content-max-width);
+            margin: 2rem auto;
+        }
+
+        .intro p, .methodology p, .conclusion p {
+            margin-bottom: 1rem;
+        }
+
+        figure {
+            margin: 2rem 0;
+        }
+
+        figure img {
+            max-width: 1000px;
+            height: 400px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .chart-map-section {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: var(--content-max-width);
+    margin: 2rem auto;
+    padding: 0 var(--content-padding);
+}
+
+.chart-wrapper {
+    flex: 1 1 48%;
+    min-width: 300px;
+}
+
+@media (max-width: 768px) {
+    .chart-map-section {
+        flex-direction: column;
+    }
+
+    .chart-wrapper {
+        flex: 1 1 100%;
+    }
+}
+
+
+        figcaption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .methodology h2, .conclusion h2 {
+            margin-bottom: 1.5rem;
+            color: #1d3557;
+        }
+
+        .chart {
+            margin-bottom: 3rem;
+            width: 100%;
+        }
+
+        .chart h3 {
+            margin-bottom: 1rem;
+            color: #1d3557;
+            text-align: center;
+        }
+
+        .scrollytelling-container {
+            position: relative;
+            margin: 4rem auto;
+            padding: 0;
+            width: 100%;
+            max-width: var(--content-max-width);
+            display: flex;
+            gap: 2rem;
+        }
+        
+
+        .video-container {
+            position: sticky;
+            top: 2rem;
+            width: 600px;
+            height: 400px;
+            z-index: 1;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .text-sections {
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        .scrolly-text {
+            position: relative;
+            padding: 2.5rem;
+            background-color: #fff;
+            color: #333;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .scrolly-text h2 {
+            color: #1d3557;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .scrolly-text p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .scrolly-text a {
+            color: #1d70b8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .scrolly-text a:hover {
+            color: #0b4884;
+            text-decoration: underline;
+        }
+
+        .methodology {
+            border-top: 1px solid #ccc;
+            padding-top: 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer {
+      background: #f0f0f0;
+      color: black;
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background-color: #1d3557;
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.2s ease;
+        }
+
+        @media (max-width: 1024px) {
+            .scrollytelling-container {
+                flex-direction: column;
+            }
+            
+            .video-container {
+                width: 100%;
+                height: 50vh;
+                position: relative;
+                top: 0;
+                margin-bottom: 2rem;
+            }
+            
+            .text-sections {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .scrolly-text {
+                padding: 1.5rem;
+            }
+
+            .scrolly-text h2 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+        <div class="banner" role="banner">
+            <div class="banner-content">
+                <h1>New Jersey's Toxic Legacy: Superfund Sites</h1>
+                <p class="subhead">New Jersey has the highest number of superfund sites in all of the U.S, many of which contain uncontrolled toxic wastes that residents can be exposed to.</p>
+            </div>
+        </div>
+    <main class="main-container">
+        <div class="scroll-progress"></div>
+        
+
+                <p class="byline">By <a href="https://somaiyahhafeez.github.io">Somaiyah Hafeez</a> | Published May 04, 2025</p>
+            
+
+          
+        
+        <div class="intro content-section">
+            <p>Just an hour away from Jersey City a town, Toms River, reeled from catastrophic contaminations by a former chemical plant owned by Ciba-Geigy, a former multinational company based in Switzerland.</p>
+            <p>The plant poisoned the ground and water in Toms River. A cluster of cancer cases were reported in children of the township. The New Jersey Department of Health reported 87 cases of pediatric cancer in the town between 1979 and 1995.</p>
+            <p>The plant was declared a superfund site in 1983. However it wasn't until 2023 that a <a href="https://dep.nj.gov/cgrestoration/?utm_medium=email&utm_source=govdelivery">final settlement</a> was reached with Ciba-Geigy Co.</p>
+            <p>However many residents and victim families <a href="https://www.nbcphiladelphia.com/news/local/toms-river-families-blast-deal-over-polluted-site/3483258/">blasted the agreement for being insufficient</a>. While the Environmental Protection Agency (EPA) has declared the site under control for human exposure, it is still an active superfund site where the remediation process hasn't completed. The site still has a vast plume of chemically contaminated groundwater beneath it.</p>
+            <p>The site is currently owned by BASF Corp. that took over the site in 2010. German based BASF Corp. agreed to preserve 1,000 acres of land to protect the groundwater resources that were contaminated and agreed to design and implement nine restoration projects on 275 acres of preserved land. The company also agreed to pay $500,000 to oversee the plan.</p>
+            <figure>
+                <img src="images/BASF.png" alt="BASF site image">
+                <figcaption>The current site is owned by BASF Corp. There is a Children's memorial garden for children who lost their lives.</figcaption>
+            </figure>          
+            <p>A former resident of Toms River said while BASF might be "being safe about what they dump–there have been way too many times in the past where we find out chemicals we thought were safe have dangerous consequences."</p>
+            <p>Toms River Superfund is known as one of the most toxic sites in the U.S but there are more than 1300 active superfund sites all around the country.</p>
+            <p>In the late 1970s as toxic waste dumps received national attention as the public became aware of the health and environmental risks, Congress established the <a href="https://www.epa.gov/superfund/superfund-cercla-overview">Comprehensive Environmental Response Compensation and Liability Act</a> (CERCLA), which is informally called Superfund. The Act allows the EPA to clean up contaminated sites and force responsible parties to "either perform cleanups or reimburse the government for EPA-led cleanup work".</p>
+            <p>New Jersey has the most Superfund sites.</p>
+        </div>
+        <div class="chart-map-section">
+            <div class="chart-wrapper">
+              <iframe title="New Jersey Leads the Nation in Active Superfund Sites"
+                      aria-label="Bar Chart"
+                      id="datawrapper-chart-UiJgJ"
+                      src="https://datawrapper.dwcdn.net/UiJgJ/1/"
+                      scrolling="no"
+                      frameborder="0"
+                      style="width: 100%; border: none;"
+                      height="576"></iframe>
+            </div>
+          
+            <div class="chart-wrapper">
+              <iframe title="New Jersey's most toxic sites"
+                      aria-label="Map"
+                      id="datawrapper-chart-L3VpQ"
+                      src="https://datawrapper.dwcdn.net/L3VpQ/3/"
+                      scrolling="no"
+                      frameborder="0"
+                      style="width: 100%; border: none;"
+                      height="576"></iframe>
+            </div>
+          </div>
+          
+    
+        <div class="content-section">
+            <p>The EPA categorizes these sites into "Human Exposure Under Control" and those where "Human Exposure Not Under Control". 11 of the 114 sites in NJ have the latter status.</p>
+        </div>
+
+        <h2> Some of New Jersey's most toxic sites </h2>
+
+        <!-- Updated Scrollytelling Section -->
+        <div class="scrollytelling-container">
+            <!-- Static video container on the side -->
+            <div class="video-container" id="site-video">
+                <video id="current-video" autoplay muted loop playsinline poster="/api/placeholder/1920/1080">
+                    <source src="videos/rolling-knolls.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            
+            <!-- Scrolling text sections -->
+            <div class="text-sections">
+                <!-- Site 1: Rolling Knolls LF -->
+                <div class="scrolly-text" id="rolling-knolls" data-video="videos/rolling-knolls.mp4">
+                    <h2>Rolling Knolls LF</h2>
+                    <p>Rolling Knolls Landfill site, in Chatham Township, is approximately 200-acre. During the 1930s through 1968 when it was used as a landfill, it received municipal solid waste, construction and demolition debris.</p>
+                    <p>To Bill Kibler, Executive Director of the Great Swamp Watershed Association, calling the site a "landfill" is misleading—he insists it's more accurately described as a "dump."</p>
+                    <p>"When I hear the term landfill, it suggests to me and I think to the public that there was some thought that went into this—some engineering perhaps, some plan for how this was going to be managed—and that's simply not the case with this dump and a lot of others like it."</p>
+                    <p>In reality, Kibler explained, it was little more than "someone digging a hole in the ground and beginning to accept municipal waste, industrial waste, sewage sludge, and a variety of other materials."</p>
+                    <p>"There's no liner, there's no drainage, there's no treatment system—any of the things you might associate with a modern landfill. None of that exists here," he said. "It's just a whole lot of toxic, buried garbage."</p>
+                    <p>Some of the contaminants in the site include Polychlorinated Biphenyls (PCBs), metals, benzene, Per- and polyfluoroalkyl substances (PFAS).</p>
+                </div>
+                
+                <!-- Site 2: Cornell Dubilier Electronics -->
+                <div class="scrolly-text" id="cornell-dubilier" data-video="videos/Cornell-dubilier.mov">
+                    <h2>Cornell Dubilier Electronics Inc.</h2>
+                    <p>Cornell Dubilier, an electronic manufacturing company, used the 26-acre site from 1936 to 1962 to make electronic components.</p>
+                    <p>Poor waste handling practices resulted in releases of PCBs and chlorinated volatile organic compounds (VOCs), primarily trichloroethylene (TCE). The soil, sediment and groundwater at the site were contaminated.</p>
+                    <p>The site was added to the EPA's National Priorities List in 1998 and the cleanup process is still ongoing.</p>
+                    <p>EPA's Superfund Human Exposure Dashboard states that the site has "a potential for unacceptable cancer risk and non-cancer hazard from exposure to total polychlorinated biphenyls (PCBs) and aroclors in sediment, floodplain soil, fish, and shellfish that is relatively widespread throughout".</p>
+                    <p>Human exposure is expected to be controlled by 2051.</p>
+                </div>
+                
+                <!-- Site 3: Former Kil-Tone Company -->
+                <div class="scrolly-text" id="kil-tone" data-video="videos/former-kil-tonne.mp4">
+                    <h2>Former Kil-Tone Company</h2>
+                    <p>The former Kil-Tone Company manufactured arsenic-based pesticides from the 1910s to late 1930s.</p>
+                    <p>EPA has found elevated concentrations of arsenic and lead in soil on the former facility property.</p>
+                    <p>The site was added to the NPL list in 2016. Human exposure is expected to be under control by 2029.</p>
+                </div>
+                
+                <!-- Site 4: Diamond Alkali Co. -->
+                <div class="scrolly-text" id="diamond-alkali" data-video="videos/Diamond-alkali-co.mp4">
+                    <h2>Diamond Alkali Co.</h2>
+                    <p>In Newark's Ironbound neighborhood is located Diamond Alkali Company, one of the most toxic sites in the U.S.</p>
+                    <p>The site, a former chemical plant where cleanup is priced at $1.4 billion is one of the eleven in New Jersey State that constain uncontrolled toxic wastes.</p>
+                    <p>These sites are vulnerable not only to the effects of climate change but also damaging to human health.</p>
+                    <p>Despite being added to NPL in 1984 after EPA sampled the site and found high levels of dioxin, highly toxic chemicals that are carcinogenic, the remediation process hasn't been completed.</p>
+                    <p>In fact the long-awaited clean up of the site was <a href="https://newjerseymonitor.com/2024/12/20/judge-approves-150m-agreement-for-passaic-river-cleanup/">finalized</a> only this year.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="conclusion content-section">
+            <p>With 114 active Superfund sites—more than any other state—New Jersey faces an enormous environmental remediation challenge. The stories of these four sites highlight the long-term consequences of industrial pollution and the slow, complex process of cleanup.</p>
+            <p>As climate change threatens to exacerbate the risks posed by these sites, the urgency of complete remediation grows. Yet the timeline for full cleanup at many sites extends decades into the future, with some, like Cornell Dubilier, not expected to have human exposure controlled until 2051.</p>
+        </div>
+        
+        <div class="methodology content-section" id="methodology">
+            <h2>Methodology</h2>
+            <p>The data for this story came from EPA's <a href="https://semspub.epa.gov/work/HQ/406089.pdf"> National Priorties List.</a> It was then cleaned and analyzed on pandas.</p>
+            <p>After analyzing for the state counts, I merged the EPA data with geospatial data on zip code to add the population of the area where the site is located.</p>
+            <p>I looked into the Human Exposure Dashboard on EPA's site and looked deeper into sites in New Jersey where the human exposure is defined as not under control. I started contacting environmental organizations, health department officals and residents of the area. This was the hardest part of the story as I wasn't able to speak with many people.</p>
+            <p>The charts and maps were made on DataWrapper and all videos are from Google Earth.</p>
+        </div>
+
+    </main>
+    
+    <div class="footer">
+        <p>Somaiyah Hafeez is a data journalist at Columbia Journalism School. You can find the code for this story <a href="somaiyahhafeez.github.io/superfund"> here.</a></p>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const progressBar = document.querySelector('.scroll-progress');
+            const scrollyTexts = document.querySelectorAll('.scrolly-text');
+            const currentVideo = document.getElementById('current-video');
+            const sourceEl = currentVideo.querySelector('source');
+    
+            function updateProgressBar() {
+                const scrollPosition = window.scrollY;
+                const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (scrollPosition / scrollHeight) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+    
+            function updateVideoBasedOnScroll() {
+                const videoContainer = document.getElementById('site-video');
+                const containerTop = videoContainer.getBoundingClientRect().top;
+    
+                if (containerTop < window.innerHeight && containerTop > -videoContainer.offsetHeight) {
+                    let closestSection = null;
+                    let closestDistance = Infinity;
+    
+                    scrollyTexts.forEach(section => {
+                        const sectionTop = section.getBoundingClientRect().top;
+                        const sectionBottom = section.getBoundingClientRect().bottom;
+                        const sectionCenter = (sectionTop + sectionBottom) / 2;
+                        const distanceFromCenter = Math.abs(sectionCenter - (window.innerHeight / 2));
+    
+                        if (distanceFromCenter < closestDistance) {
+                            closestDistance = distanceFromCenter;
+                            closestSection = section;
+                        }
+                    });
+    
+                    if (closestSection) {
+                        const videoSrc = closestSection.getAttribute('data-video');
+                        if (sourceEl.getAttribute('src') !== videoSrc) {
+                            sourceEl.setAttribute('src', videoSrc);
+                            currentVideo.load();
+                            currentVideo.play().catch(e => console.warn("Video play error:", e));
+                        }
+                    }
+                }
+            }
+    
+            window.addEventListener('scroll', () => {
+                updateProgressBar();
+                updateVideoBasedOnScroll();
+            });
+    
+            window.addEventListener('resize', updateProgressBar);
+    
+            updateProgressBar();
+            updateVideoBasedOnScroll();
+    
+            // For Datawrapper charts
+            window.addEventListener("message", function (a) {
+                if (a.data["datawrapper-height"]) {
+                    const e = document.querySelectorAll("iframe");
+                    for (let t in a.data["datawrapper-height"])
+                        for (let i = 0, r; r = e[i]; i++)
+                            if (r.contentWindow === a.source) {
+                                r.style.height = a.data["datawrapper-height"][t] + "px";
+                            }
+                }
+            });
+        });
+    </script>
+    
+  
+</body>
+</html>
