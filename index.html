@@ -209,13 +209,14 @@
             text-align: center;
         }
 
-        /* New styles for side-by-side layout */
+        /* Modified styles for consistent left-right layout */
         .site-container {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
             margin: 3rem auto;
             align-items: flex-start;
+            /* Removed the flex-direction: row-reverse for even-numbered containers */
         }
 
         .site-image {
@@ -235,10 +236,6 @@
             flex: 1 1 45%;
             min-width: 300px;
             padding: 1rem;
-        }
-
-        .site-container:nth-child(even) {
-            flex-direction: row-reverse;
         }
 
         .site-caption {
@@ -314,7 +311,7 @@
         }
 
         @media (max-width: 768px) {
-            .site-container, .site-container:nth-child(even) {
+            .site-container {
                 flex-direction: column;
             }
             
@@ -357,17 +354,13 @@
             <p>However many residents and victim families <a href="https://www.nbcphiladelphia.com/news/local/toms-river-families-blast-deal-over-polluted-site/3483258/">blasted the agreement for being insufficient</a>. While the Environmental Protection Agency (EPA) has declared the site under control for human exposure, it is still an active superfund site where the remediation process hasn't completed. The site still has a vast plume of chemically contaminated groundwater beneath it.</p>
             <p>The site is currently owned by BASF Corp. that took over the site in 2010. German based BASF Corp. agreed to preserve 1,000 acres of land to protect the groundwater resources that were contaminated and agreed to design and implement nine restoration projects on 275 acres of preserved land. The company also agreed to pay $500,000 to oversee the plan.</p>
         </div>
-            <figure>
-                <img src="images/BASF.png" alt="BASF site image">
-                <figcaption>The current site is owned by BASF Corp. There is a Children's memorial garden for children who lost their lives.</figcaption>
-            </figure>  
+
+        <figure> <img src="images/BASF.png" alt="BASF site image"> <figcaption>The current site is owned by BASF Corp. There is a Children's memorial garden for children who lost their lives.</figcaption> </figure>
 
                 <p>A former resident of Toms River said while BASF might be "being safe about what they dump–there have been way too many times in the past where we find out chemicals we thought were safe have dangerous consequences."</p>
                 <p>Toms River Superfund is known as one of the most toxic sites in the U.S but there are more than 1300 active superfund sites all around the country.</p>
                 <p>In the late 1970s as toxic waste dumps received national attention as the public became aware of the health and environmental risks, Congress established the <a href="https://www.epa.gov/superfund/superfund-cercla-overview">Comprehensive Environmental Response Compensation and Liability Act</a> (CERCLA), which is informally called Superfund. The Act allows the EPA to clean up contaminated sites and force responsible parties to "either perform cleanups or reimburse the government for EPA-led cleanup work".</p>
                 <p>New Jersey has the most Superfund sites.</p>
-
-        </div>
 
         <div class="chart-map-section">
             <div class="chart-wrapper">
