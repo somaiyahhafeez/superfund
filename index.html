@@ -197,16 +197,24 @@
      flex: 1 1 48%;
      min-width: 300px;
  }
- @media (max-width: 768px) {
+@media (max-width: 768px) {
   .scroll-container {
-    width: 100%;
     flex-direction: column;
+    gap: 1rem;
   }
 
   .sticky-image {
     width: 100%;
-    max-height: none;
     position: relative;
+    top: 0;
+    max-height: none;
+  }
+
+  .sticky-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0;
   }
 
   .scroll-sections {
@@ -214,9 +222,17 @@
   }
 
   .scroll-section {
-    padding: 1.5rem 1rem; 
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  .site-caption {
+    text-align: center;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
   }
 }
+
 
  @media (max-width: 768px) {
      .chart-map-section {
