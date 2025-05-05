@@ -214,26 +214,37 @@
             text-align: center;
         }
 
-        /* New site container design */
+        /* Improved site container design with standardized sizing */
         .site-container {
             display: flex;
+            flex-direction: row;
             margin: 3rem 0;
             clear: both;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
 
         .site-image {
-            float: left;
-            width: 45%;
-            margin: 0 20px 20px 0;
+            width: 400px;
+            height: 400px;
+            flex-shrink: 0;
+            position: relative;
         }
 
         .site-image img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
         }
 
         .site-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
             background-color: rgba(0,0,0,0.7);
             color: white;
             padding: 8px 12px;
@@ -242,15 +253,26 @@
         }
 
         .site-content {
-            overflow: hidden;
+            flex: 1;
+            padding: 25px;
+            overflow-y: auto;
+            max-height: 400px;
         }
 
         .site-content h2 {
             margin-top: 0;
+            margin-bottom: 15px;
         }
 
         .site-content p {
             margin-bottom: 1rem;
+        }
+        
+        /* Fix for DataWrapper charts */
+        .datawrapper-chart {
+            width: 100%;
+            height: 576px;
+            border: none;
         }
 
         .methodology {
@@ -277,11 +299,18 @@
             transition: width 0.2s ease;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
+            .site-container {
+                flex-direction: column;
+            }
+            
             .site-image {
-                float: none;
                 width: 100%;
-                margin: 0 0 20px 0;
+                height: 300px;
+            }
+            
+            .site-content {
+                max-height: none;
             }
             
             .chart-map-section {
@@ -340,8 +369,8 @@
                         src="https://datawrapper.dwcdn.net/UiJgJ/1/"
                         scrolling="no"
                         frameborder="0"
-                        style="width: 100%; border: none;"
-                        height="576"></iframe>
+                        class="datawrapper-chart"
+                        style="min-width: 100%;"></iframe>
             </div>
             
             <div class="chart-wrapper">
@@ -351,8 +380,8 @@
                         src="https://datawrapper.dwcdn.net/L3VpQ/3/"
                         scrolling="no"
                         frameborder="0"
-                        style="width: 100%; border: none;"
-                        height="576"></iframe>
+                        class="datawrapper-chart"
+                        style="min-width: 100%;"></iframe>
             </div>
         </div>
         
@@ -362,7 +391,7 @@
 
         <h2>Some of New Jersey's most toxic sites</h2>
         
-        <!-- Rolling Knolls LF - Redesigned -->
+        <!-- Rolling Knolls LF - Standardized -->
         <div class="site-container">
             <div class="site-image">
                 <img src="images/RKL1.png" alt="Rolling Knolls site view">
@@ -379,7 +408,7 @@
             </div>
         </div>
         
-        <!-- Cornell Dubilier Electronics Inc. - Redesigned -->
+        <!-- Cornell Dubilier Electronics Inc. - Standardized -->
         <div class="site-container">
             <div class="site-image">
                 <img src="images/Cornell1.jpg" alt="Cornell Dubilier site view">
@@ -395,7 +424,7 @@
             </div>
         </div>
         
-        <!-- Former Kil-Tone Company - Redesigned -->
+        <!-- Former Kil-Tone Company - Standardized -->
         <div class="site-container">
             <div class="site-image">
                 <img src="images/kil-tone.jpg" alt="Former Kil-Tone site view">
@@ -409,7 +438,7 @@
             </div>
         </div>
         
-        <!-- Diamond Alkali Co. - Redesigned -->
+        <!-- Diamond Alkali Co. - Standardized -->
         <div class="site-container">
             <div class="site-image">
                 <img src="images/diamond alkali.jpeg" alt="Diamond Alkali site view">
@@ -457,6 +486,19 @@
             
             window.addEventListener('scroll', updateProgressBar);
             updateProgressBar();
+            
+            // Fix Datawrapper chart responsive behavior
+            window.addEventListener('message', function(event) {
+                if (typeof event.data['datawrapper-height'] !== 'undefined') {
+                    const charts = document.querySelectorAll('.datawrapper-chart');
+                    for (let chart of charts) {
+                        const id = chart.id;
+                        if (event.data['datawrapper-height'][id]) {
+                            chart.style.height = event.data['datawrapper-height'][id] + 'px';
+                        }
+                    }
+                }
+            });
         });
     </script>
 </body>
