@@ -90,7 +90,7 @@
             background-color: #f5f5f7;
             color: #333;
             line-height: 1.6;
-            overflow-y: scroll; /* Ensures scrolling */
+            overflow-y: scroll;
         }
         
         .banner {
@@ -214,38 +214,23 @@
             text-align: center;
         }
 
+        /* New site container design */
         .site-container {
             display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin: 3rem auto;
-            align-items: stretch; 
-            min-height: 400px; 
+            margin: 3rem 0;
+            clear: both;
         }
 
         .site-image {
-            flex: 1 1 45%;
-            min-width: 300px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
+            float: left;
+            width: 45%;
+            margin: 0 20px 20px 0;
         }
 
         .site-image img {
             width: 100%;
-            height: 100%; 
-            object-fit: cover; 
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .site-content {
-            flex: 1 1 45%;
-            min-width: 300px;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center; 
+            height: auto;
+            display: block;
         }
 
         .site-caption {
@@ -254,57 +239,18 @@
             padding: 8px 12px;
             font-size: 0.85rem;
             text-align: center;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
         }
 
-        .slides {
-            position: relative;
+        .site-content {
             overflow: hidden;
-            height: 100%; 
         }
 
-        .slide {
-            position: relative;
-            display: none;
-            height: 100%; 
+        .site-content h2 {
+            margin-top: 0;
         }
 
-        .slide.active {
-            display: block;
-            height: 100%; 
-        }
-
-        .slide-controls {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 10px;
-            position: absolute;
-            bottom: 50px; 
-            left: 0;
-            right: 0;
-            z-index: 2;
-        }
-
-        .slide-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: #ccc;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .slide-dot.active {
-            background-color: #1d3557;
-        }
-
-        .slide-dot:hover {
-            background-color: #1a5a96;
+        .site-content p {
+            margin-bottom: 1rem;
         }
 
         .methodology {
@@ -332,13 +278,10 @@
         }
 
         @media (max-width: 768px) {
-            .site-container {
-                flex-direction: column;
-                min-height: auto;
-            }
-            
             .site-image {
-                height: 300px; 
+                float: none;
+                width: 100%;
+                margin: 0 0 20px 0;
             }
             
             .chart-map-section {
@@ -381,12 +324,15 @@
             <p>The site is currently owned by BASF Corp. that took over the site in 2010. German based BASF Corp. agreed to preserve 1,000 acres of land to protect the groundwater resources that were contaminated and agreed to design and implement nine restoration projects on 275 acres of preserved land. The company also agreed to pay $500,000 to oversee the plan.</p>
         </div>
 
-        <figure> <img src="images/BASF.png" alt="BASF site image"> <figcaption>The current site is owned by BASF Corp. There is a Children's memorial garden for children who lost their lives.</figcaption> </figure>
+        <figure>
+            <img src="images/BASF.png" alt="BASF site image">
+            <figcaption>The current site is owned by BASF Corp. There is a Children's memorial garden for children who lost their lives.</figcaption>
+        </figure>
 
-                <p>A former resident of Toms River said while BASF might be "being safe about what they dump–there have been way too many times in the past where we find out chemicals we thought were safe have dangerous consequences."</p>
-                <p>Toms River Superfund is known as one of the most toxic sites in the U.S but there are more than 1300 active superfund sites all around the country.</p>
-                <p>In the late 1970s as toxic waste dumps received national attention as the public became aware of the health and environmental risks, Congress established the <a href="https://www.epa.gov/superfund/superfund-cercla-overview">Comprehensive Environmental Response Compensation and Liability Act</a> (CERCLA), which is informally called Superfund. The Act allows the EPA to clean up contaminated sites and force responsible parties to "either perform cleanups or reimburse the government for EPA-led cleanup work".</p>
-                <p>New Jersey has the most Superfund sites.</p>
+        <p>A former resident of Toms River said while BASF might be "being safe about what they dump–there have been way too many times in the past where we find out chemicals we thought were safe have dangerous consequences."</p>
+        <p>Toms River Superfund is known as one of the most toxic sites in the U.S but there are more than 1300 active superfund sites all around the country.</p>
+        <p>In the late 1970s as toxic waste dumps received national attention as the public became aware of the health and environmental risks, Congress established the <a href="https://www.epa.gov/superfund/superfund-cercla-overview">Comprehensive Environmental Response Compensation and Liability Act</a> (CERCLA), which is informally called Superfund. The Act allows the EPA to clean up contaminated sites and force responsible parties to "either perform cleanups or reimburse the government for EPA-led cleanup work".</p>
+        <p>New Jersey has the most Superfund sites.</p>
 
         <div class="chart-map-section">
             <div class="chart-wrapper">
@@ -418,23 +364,11 @@
 
         <h2>Some of New Jersey's most toxic sites</h2>
         
-        <!-- Rolling Knolls LF -->
+        <!-- Rolling Knolls LF - Redesigned -->
         <div class="site-container">
             <div class="site-image">
-                <div class="slides" id="rolling-knolls-slides">
-                    <div class="slide active">
-                        <img src="images/RKL1.png" alt="Rolling Knolls site view 1">
-                        <div class="site-caption">Image courtesy: Great Swap Watershed Association</div>
-                    </div>
-                    <div class="slide">
-                        <img src="images/RKL2.png" alt="Rolling Knolls site view 2">
-                        <div class="site-caption">EPA sample at site. Image courtesy: Great Swap Watershed Association</div>
-                    </div>
-                </div>
-                <div class="slide-controls" id="rolling-knolls-controls">
-                    <button class="slide-dot active" data-slide="0"></button>
-                    <button class="slide-dot" data-slide="1"></button>
-                </div>
+                <img src="images/RKL1.png" alt="Rolling Knolls site view">
+                <div class="site-caption">Image courtesy: Great Swap Watershed Association</div>
             </div>
             <div class="site-content">
                 <h2>Rolling Knolls LF</h2>
@@ -447,23 +381,11 @@
             </div>
         </div>
         
-        <!-- Cornell Dubilier Electronics Inc. -->
+        <!-- Cornell Dubilier Electronics Inc. - Redesigned -->
         <div class="site-container">
             <div class="site-image">
-                <div class="slides" id="cornell-dubilier-slides">
-                    <div class="slide active">
-                        <img src="images/Cornell1.jpg" alt="Cornell Dubilier site view 1">
-                        <div class="site-caption">PCB-contaminated material was historically disposed of directly into adjacent wetlands and an unnamed stream. Image Courtesy: Damage Assessment, Remediation and Restoration Program</div>
-                    </div>
-                    <div class="slide">
-                        <img src="images/cornell2.jpg" alt="Cornell Dubilier site view 2">
-                        <div class="site-caption">The company site. Image Courtesy: Damage Assessment, Remediation and Restoration Program</div>
-                    </div>
-                </div>
-                <div class="slide-controls" id="cornell-dubilier-controls">
-                    <button class="slide-dot active" data-slide="0"></button>
-                    <button class="slide-dot" data-slide="1"></button>
-                </div>
+                <img src="images/Cornell1.jpg" alt="Cornell Dubilier site view">
+                <div class="site-caption">PCB-contaminated material was historically disposed of directly into adjacent wetlands and an unnamed stream. Image Courtesy: Damage Assessment, Remediation and Restoration Program</div>
             </div>
             <div class="site-content">
                 <h2>Cornell Dubilier Electronics Inc.</h2>
@@ -475,23 +397,11 @@
             </div>
         </div>
         
-        <!-- Former Kil-Tone Company -->
+        <!-- Former Kil-Tone Company - Redesigned -->
         <div class="site-container">
             <div class="site-image">
-                <div class="slides" id="kil-tone-slides">
-                    <div class="slide active">
-                        <img src="images/kil-tone.jpg" alt="Former Kil-Tone site view 1">
-                        <div class="site-caption">Image courtesy: The Press of Atlantic city</div>
-                    </div>
-                    <div class="slide">
-                        <img src="images/kil-tone.webp" alt="Former Kil-Tone site view 2">
-                        <div class="site-caption">Image courtesy: Asbury Park Press</div>
-                    </div>
-                </div>
-                <div class="slide-controls" id="kil-tone-controls">
-                    <button class="slide-dot active" data-slide="0"></button>
-                    <button class="slide-dot" data-slide="1"></button>
-                </div>
+                <img src="images/kil-tone.jpg" alt="Former Kil-Tone site view">
+                <div class="site-caption">Image courtesy: The Press of Atlantic city</div>
             </div>
             <div class="site-content">
                 <h2>Former Kil-Tone Company</h2>
@@ -501,23 +411,11 @@
             </div>
         </div>
         
-        <!-- Diamond Alkali Co. -->
+        <!-- Diamond Alkali Co. - Redesigned -->
         <div class="site-container">
             <div class="site-image">
-                <div class="slides" id="diamond-alkali-slides">
-                    <div class="slide active">
-                        <img src="images/diamond alkali.jpeg" alt="Diamond Alkali site view 1">
-                        <div class="site-caption">Image courtesy: </div>
-                    </div>
-                    <div class="slide">
-                        <img src="images/diamond-alkali.jpg" alt="Diamond Alkali site view 2">
-                        <div class="site-caption">Image courtesy: NJ Spotlight News/Michael Sol Warren</div>
-                    </div>
-                </div>
-                <div class="slide-controls" id="diamond-alkali-controls">
-                    <button class="slide-dot active" data-slide="0"></button>
-                    <button class="slide-dot" data-slide="1"></button>
-                </div>
+                <img src="images/diamond alkali.jpeg" alt="Diamond Alkali site view">
+                <div class="site-caption">Image courtesy: NJ Spotlight News</div>
             </div>
             <div class="site-content">
                 <h2>Diamond Alkali Co.</h2>
@@ -561,45 +459,6 @@
             
             window.addEventListener('scroll', updateProgressBar);
             updateProgressBar();
-            
-            // Slideshow functionality
-            const slideContainers = ['rolling-knolls', 'cornell-dubilier', 'kil-tone', 'diamond-alkali'];
-            
-            slideContainers.forEach(container => {
-                const slides = document.querySelectorAll(`#${container}-slides .slide`);
-                const dots = document.querySelectorAll(`#${container}-controls .slide-dot`);
-                
-                // Set up dot click handlers
-                dots.forEach(dot => {
-                    dot.addEventListener('click', function() {
-                        const slideIndex = this.getAttribute('data-slide');
-                        
-                        // Hide all slides
-                        slides.forEach(slide => slide.classList.remove('active'));
-                        // Deactivate all dots
-                        dots.forEach(dot => dot.classList.remove('active'));
-                        
-                        // Show selected slide and activate dot
-                        slides[slideIndex].classList.add('active');
-                        this.classList.add('active');
-                    });
-                });
-                
-                // Auto-rotation (optional)
-                let slideIndex = 0;
-                setInterval(() => {
-                    slideIndex = (slideIndex + 1) % slides.length;
-                    
-                    // Hide all slides
-                    slides.forEach(slide => slide.classList.remove('active'));
-                    // Deactivate all dots
-                    dots.forEach(dot => dot.classList.remove('active'));
-                    
-                    // Show next slide and activate dot
-                    slides[slideIndex].classList.add('active');
-                    dots[slideIndex].classList.add('active');
-                }, 5000);
-            });
         });
     </script>
 </body>
