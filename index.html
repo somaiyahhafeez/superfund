@@ -232,8 +232,8 @@
   position: sticky;
   top: 10vh;
   width: 45%;
-  height: auto; /* NEW */
-  max-height: 500px; /* NEW */
+  height: auto;
+  max-height: 650px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -242,10 +242,11 @@
 .sticky-image img {
   width: 100%;
   height: auto;
+  max-height: 100%;
   object-fit: cover;
-  max-height: 500px; /* NEW: prevent pixel blow-up */
   border-radius: 8px;
 }
+
 
 
 .sticky-image .site-caption {
@@ -258,14 +259,27 @@
   width: 100%;
   text-align: center;
 }
-.scroll-section {
-  min-height: unset; /* remove forced vertical height */
-  padding: 1rem 0;
-  margin-bottom: 4rem;
-}
 .scroll-container {
-  align-items: flex-start; /* aligns image and text top */
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  max-width: 1300px;
+  margin: 0 auto;
 }
+
+.scroll-sections {
+  width: 55%;
+  padding-top: 1rem;
+}
+
+.scroll-section {
+  background: var(--light-background);
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+
 .scrollytelling {
   background-color: var(--background);
 }
@@ -539,7 +553,17 @@
             
             window.addEventListener('scroll', updateProgressBar);
             updateProgressBar();
-            
+            window.addEventListener("message", (event) => {
+    if (event.data["datawrapper-height"]) {
+        for (const chartId in event.data["datawrapper-height"]) {
+            const iframe = document.getElementById(chartId);
+            if (iframe) {
+                iframe.style.height = event.data["datawrapper-height"][chartId] + "px";
+            }
+        }
+    }
+});
+
             // Fix Datawrapper chart responsive behavior
             window.addEventListener('message', function(event) {
                 if (typeof event.data['datawrapper-height'] !== 'undefined') {
