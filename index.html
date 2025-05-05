@@ -419,7 +419,7 @@ p.subhead {
                 </div>
                 
                 <!-- Site 2: Cornell Dubilier Electronics -->
-                <div class="scrolly-text" id="cornell-dubilier" data-video="videos/Cornell-dubilier.mov">
+                <div class="scrolly-text" id="cornell-dubilier" data-video="videos/Cornell-dubilier.mp4">
                     <h2>Cornell Dubilier Electronics Inc.</h2>
                     <p>Cornell Dubilier, an electronic manufacturing company, used the 26-acre site from 1936 to 1962 to make electronic components.</p>
                     <p>Poor waste handling practices resulted in releases of PCBs and chlorinated volatile organic compounds (VOCs), primarily trichloroethylene (TCE). The soil, sediment and groundwater at the site were contaminated.</p>
@@ -472,6 +472,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const scrollyTexts = document.querySelectorAll('.scrolly-text');
     const currentVideo = document.getElementById('current-video');
     const sourceEl = currentVideo.querySelector('source');
+    const videoContainer = document.getElementById('site-video');
 
     // Progress bar
     function updateProgressBar() {
@@ -512,22 +513,68 @@ document.addEventListener('DOMContentLoaded', function () {
             const videoSrc = mostVisibleSection.getAttribute('data-video');
             if (sourceEl.getAttribute('src') !== videoSrc) {
                 console.log("Switching to video:", videoSrc); // For debugging
+                
+                // Set display to none while loading to prevent flash of previous video
+                currentVideo.style.opacity = 0;
+                
+                // Update the video source
                 sourceEl.setAttribute('src', videoSrc);
-                currentVideo.load();
-                currentVideo.play().catch(e => console.warn("Video play error:", e));
+                
+                // Handle both MP4 and MOV formats
+                try {
+                    currentVideo.load();
+                    
+                    // When the video has loaded enough to play, make it visible again
+                    currentVideo.oncanplay = function() {
+                        currentVideo.style.opacity = 1;
+                        currentVideo.play().catch(e => {
+                            console.warn("Video play error:", e);
+                            // Show a fallback if video fails to play
+                            videoContainer.style.backgroundColor = "#000";
+                        });
+                    };
+                    
+                    // Set a timeout in case the video never loads
+                    setTimeout(() => {
+                        if (currentVideo.style.opacity === "0") {
+                            currentVideo.style.opacity = 1;
+                        }
+                    }, 1000);
+                    
+                } catch (e) {
+                    console.error("Error loading video:", e);
+                }
             }
         }
     }
 
-    // Add debugging output for initial load
+    // Add CSS for smooth video transitions
+    const style = document.createElement('style');
+    style.textContent = `
+        #current-video {
+            transition: opacity 0.3s ease;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Log initial state for debugging
     console.log("Found scrolly sections:", scrollyTexts.length);
     scrollyTexts.forEach(section => {
         console.log("Section:", section.id, "Video:", section.getAttribute('data-video'));
+        
+        // Preload videos for smoother transitions
+        const videoSrc = section.getAttribute('data-video');
+        if (videoSrc) {
+            const preloadLink = document.createElement('link');
+            preloadLink.rel = 'preload';
+            preloadLink.as = 'video';
+            preloadLink.href = videoSrc;
+            document.head.appendChild(preloadLink);
+        }
     });
 
     // Initial trigger
     updateProgressBar();
-    updateVideoBasedOnScroll();
     
     // Add a small delay to handle initial layout
     setTimeout(updateVideoBasedOnScroll, 500);
