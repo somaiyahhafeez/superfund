@@ -483,40 +483,74 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Video update based on visible section
     function updateVideoBasedOnScroll() {
-        let newVideo = null;
+        // Find the most visible section
+        let maxVisibility = 0;
+        let mostVisibleSection = null;
 
         scrollyTexts.forEach(section => {
             const rect = section.getBoundingClientRect();
-
-            // Trigger when section is in top half of screen
-            if (rect.top < window.innerHeight * 0.5 && rect.bottom > 0) {
-                const videoSrc = section.getAttribute('data-video');
-                if (sourceEl.getAttribute('src') !== videoSrc) {
-                    newVideo = videoSrc;
-                }
+            
+            // Calculate how much of the section is visible in the viewport
+            const visibleTop = Math.max(0, rect.top);
+            const visibleBottom = Math.min(window.innerHeight, rect.bottom);
+            const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+            
+            // Weight sections near the center of the screen more heavily
+            const distanceFromCenter = Math.abs((visibleTop + visibleBottom) / 2 - window.innerHeight / 2);
+            const centralityFactor = 1 - (distanceFromCenter / (window.innerHeight / 2));
+            
+            const visibility = visibleHeight * centralityFactor;
+            
+            if (visibility > maxVisibility) {
+                maxVisibility = visibility;
+                mostVisibleSection = section;
             }
         });
 
-        if (newVideo) {
-            sourceEl.setAttribute('src', newVideo);
-            currentVideo.load();
-            currentVideo.play().catch(e => console.warn("Video play error:", e));
+        // If we found a visible section, update the video if needed
+        if (mostVisibleSection) {
+            const videoSrc = mostVisibleSection.getAttribute('data-video');
+            if (sourceEl.getAttribute('src') !== videoSrc) {
+                console.log("Switching to video:", videoSrc); // For debugging
+                sourceEl.setAttribute('src', videoSrc);
+                currentVideo.load();
+                currentVideo.play().catch(e => console.warn("Video play error:", e));
+            }
         }
     }
+
+    // Add debugging output for initial load
+    console.log("Found scrolly sections:", scrollyTexts.length);
+    scrollyTexts.forEach(section => {
+        console.log("Section:", section.id, "Video:", section.getAttribute('data-video'));
+    });
 
     // Initial trigger
     updateProgressBar();
     updateVideoBasedOnScroll();
-    setTimeout(updateVideoBasedOnScroll, 500); // Handle layout shift
+    
+    // Add a small delay to handle initial layout
+    setTimeout(updateVideoBasedOnScroll, 500);
 
-    // Scroll event
+    // Throttle scroll events for better performance
+    let scrollTimeout;
     window.addEventListener('scroll', () => {
-        updateProgressBar();
-        updateVideoBasedOnScroll();
+        updateProgressBar(); // Update progress bar immediately
+        
+        // Throttle the expensive video update
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(updateVideoBasedOnScroll, 50);
     });
 
-    // Resize event
-    window.addEventListener('resize', updateProgressBar);
+    // Debounce resize events
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            updateProgressBar();
+            updateVideoBasedOnScroll();
+        }, 100);
+    });
 
     // Datawrapper chart autoresize
     window.addEventListener("message", function (a) {
