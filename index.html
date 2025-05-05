@@ -466,70 +466,70 @@ p.subhead {
     <div class="footer">
         <p>Somaiyah Hafeez is a data journalist at Columbia Journalism School. You can find the code for this story <a href="somaiyahhafeez.github.io/superfund"> here.</a></p>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const progressBar = document.querySelector('.scroll-progress');
-            const scrollyTexts = document.querySelectorAll('.scrolly-text');
-            const currentVideo = document.getElementById('current-video');
-            const sourceEl = currentVideo.querySelector('source');
-    
-            function updateProgressBar() {
-                const scrollPosition = window.scrollY;
-                const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const progress = (scrollPosition / scrollHeight) * 100;
-                progressBar.style.width = `${progress}%`;
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const progressBar = document.querySelector('.scroll-progress');
+    const scrollyTexts = document.querySelectorAll('.scrolly-text');
+    const currentVideo = document.getElementById('current-video');
+    const sourceEl = currentVideo.querySelector('source');
+
+    // Progress bar
+    function updateProgressBar() {
+        const scrollPosition = window.scrollY;
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollPosition / scrollHeight) * 100;
+        progressBar.style.width = `${progress}%`;
+    }
+
+    // Video update based on visible section
+    function updateVideoBasedOnScroll() {
+        let newVideo = null;
+
+        scrollyTexts.forEach(section => {
+            const rect = section.getBoundingClientRect();
+
+            // Trigger when section is in top half of screen
+            if (rect.top < window.innerHeight * 0.5 && rect.bottom > 0) {
+                const videoSrc = section.getAttribute('data-video');
+                if (sourceEl.getAttribute('src') !== videoSrc) {
+                    newVideo = videoSrc;
+                }
             }
-function updateVideoBasedOnScroll() {
-    const windowMidpoint = window.innerHeight / 2;
+        });
 
-    let closestSection = null;
-    let closestDistance = Infinity;
-
-    scrollyTexts.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        const sectionCenter = rect.top + rect.height / 2;
-        const distance = Math.abs(sectionCenter - windowMidpoint);
-
-        if (distance < closestDistance) {
-            closestDistance = distance;
-            closestSection = section;
-        }
-    });
-
-    if (closestSection) {
-        const videoSrc = closestSection.getAttribute('data-video');
-        if (sourceEl.getAttribute('src') !== videoSrc) {
-            sourceEl.setAttribute('src', videoSrc);
+        if (newVideo) {
+            sourceEl.setAttribute('src', newVideo);
             currentVideo.load();
             currentVideo.play().catch(e => console.warn("Video play error:", e));
         }
     }
-}
-    
-            window.addEventListener('scroll', () => {
-                updateProgressBar();
-                updateVideoBasedOnScroll();
-            });
-    
-            window.addEventListener('resize', updateProgressBar);
-    
-            updateProgressBar();
-            updateVideoBasedOnScroll();
-    
-            // For Datawrapper charts
-            window.addEventListener("message", function (a) {
-                if (a.data["datawrapper-height"]) {
-                    const e = document.querySelectorAll("iframe");
-                    for (let t in a.data["datawrapper-height"])
-                        for (let i = 0, r; r = e[i]; i++)
-                            if (r.contentWindow === a.source) {
-                                r.style.height = a.data["datawrapper-height"][t] + "px";
-                            }
-                }
-            });
-        });
-    </script>
-    
-  
+
+    // Initial trigger
+    updateProgressBar();
+    updateVideoBasedOnScroll();
+    setTimeout(updateVideoBasedOnScroll, 500); // Handle layout shift
+
+    // Scroll event
+    window.addEventListener('scroll', () => {
+        updateProgressBar();
+        updateVideoBasedOnScroll();
+    });
+
+    // Resize event
+    window.addEventListener('resize', updateProgressBar);
+
+    // Datawrapper chart autoresize
+    window.addEventListener("message", function (a) {
+        if (a.data["datawrapper-height"]) {
+            const e = document.querySelectorAll("iframe");
+            for (let t in a.data["datawrapper-height"])
+                for (let i = 0, r; r = e[i]; i++)
+                    if (r.contentWindow === a.source) {
+                        r.style.height = a.data["datawrapper-height"][t] + "px";
+                    }
+        }
+    });
+});
+</script>
 </body>
 </html>
