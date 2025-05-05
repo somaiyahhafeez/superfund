@@ -10,10 +10,6 @@ For this story I looked into superfund sites, areas that are hazradous and conta
 You can explore the data [here](https://semspub.epa.gov/work/HQ/406089.pdf). It contains a log of deplatforming events on campus from 1998 to 2025. It's updated regularly by FIRE and while the methodology says that the incidents are self-reported, the reality is that FIRE staffers gather most of these through media reports, 
 letters to campuses and student reports. FIRE also employs full fact-checking and independent verification procedures before the incident makes it into the database. 
 
-## Goals
-
-
-
 
 ## Frameworks Used
 
