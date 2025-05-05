@@ -162,6 +162,46 @@ p.subhead {
             margin-bottom: 1rem;
         }
 
+            .slide {
+        position: relative;
+    }
+    
+    .slide-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        text-align: center;
+    }
+    
+    .slide-dots {
+        position: absolute;
+        bottom: 40px; 
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+        z-index: 2;
+    }
+    
+    .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+    
+    .dot.active {
+        background-color: white;
+    }
+
         figure {
             margin: 2rem 0;
         }
@@ -449,80 +489,71 @@ p.subhead {
 
         <h2> Some of New Jersey's most toxic sites </h2>
 
-        <!-- Updated Scrollytelling Section with Image Slideshow -->
-        <div class="scrollytelling-container">
-            <!-- Slideshow container on the side -->
-            <div class="slideshow-container" id="site-slideshow">
-                <!-- Each site will have its own set of slides -->
-                <!-- Rolling Knolls Slides -->
-                <div class="site-slides" id="rolling-knolls-slides">
-                    <div class="slide active">
-                        <img src="images/RKL1.png" alt="Rolling Knolls site view 1">
-                        <p>Image courtesy: Great Swap Watershed Association</p>
-
-                    </div>
-                    <div class="slide">
-                        <img src="images/RK2.png" alt="Rolling Knolls site view 2">
-                        <p>Image courtesy: Great Swap Watershed Association</p>
-
-                    </div>
-                    <div class="slide-dots">
-                        <span class="dot active" data-index="0"></span>
-                        <span class="dot" data-index="1"></span>
-                    </div>
-                </div>
-                
-                <!-- Cornell Dubilier Slides -->
-                <div class="site-slides" id="cornell-dubilier-slides" style="display: none;">
-                    <div class="slide active">
-                        <img src="images/Cornell1.jpg" alt="Cornell Dubilier site view 1">
-                        <p>Image Courtesy: Damage Assessment, Remediation and Restoration Program</p>
-                    </div>
-                    <div class="slide">
-                        <img src="images/cornell2.jpg" alt="Cornell Dubilier site view 2">
-                        <p>Image Courtesy: Damage Assessment, Remediation and Restoration Program</p>
-
-                    </div>
-                    <div class="slide-dots">
-                        <span class="dot active" data-index="0"></span>
-                        <span class="dot" data-index="1"></span>
-                    </div>
-                </div>
-                
-                <!-- Kil-Tone Slides -->
-                <div class="site-slides" id="kil-tone-slides" style="display: none;">
-                    <div class="slide active">
-                        <img src="images/kil-tone.jpg" alt="Former Kil-Tone site view 1">
-                        <p>Image courtesy:</p>
-                    </div>
-                    <div class="slide">
-                        <img src="images/kil-tone.jpg" alt="Former Kil-Tone site view 2">
-                        <p>Image courtesy:</p>
-
-                    </div>
-                    <div class="slide-dots">
-                        <span class="dot active" data-index="0"></span>
-                        <span class="dot" data-index="1"></span>
-                    </div>
-                </div>
-                
-                <!-- Diamond Alkali Slides -->
-                <div class="site-slides" id="diamond-alkali-slides" style="display: none;">
-                    <div class="slide active">
-                        <img src="images/diamond alkali.jpeg" alt="Diamond Alkali site view 1">
-                        <p>Image courtesy:</p>
-                    </div>
-                    <div class="slide">
-                        <img src="images/diamond-alkali.jpg" alt="Diamond Alkali site view 2">
-                        <p>Image courtesy: NJ Spotlight News/Michael Sol Warren</p>
-                    </div>
-                    <div class="slide-dots">
-                        <span class="dot active" data-index="0"></span>
-                        <span class="dot" data-index="1"></span>
-                    </div>
-                </div>
-            </div>
-            
+<div class="slideshow-container" id="site-slideshow">
+    <div class="site-slides" id="rolling-knolls-slides">
+        <div class="slide active">
+            <img src="images/RKL1.png" alt="Rolling Knolls site view 1">
+            <div class="slide-caption">Image courtesy: Great Swap Watershed Association</div>
+        </div>
+        <div class="slide">
+            <img src="images/RK2.png" alt="Rolling Knolls site view 2">
+            <div class="slide-caption">Image courtesy: Great Swap Watershed Association</div>
+        </div>
+        <div class="slide-dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+        </div>
+    </div>
+    
+    <!-- Cornell Dubilier Slides -->
+    <div class="site-slides" id="cornell-dubilier-slides" style="display: none;">
+        <div class="slide active">
+            <img src="images/Cornell1.jpg" alt="Cornell Dubilier site view 1">
+            <div class="slide-caption">PCB-contaminated material was historically disposed of directly into adjacent wetlands and an unnamed stream. 
+                Image Courtesy: Damage Assessment, Remediation and Restoration Program</div>
+        </div>
+        <div class="slide">
+            <img src="images/cornell2.jpg" alt="Cornell Dubilier site view 2">
+            <div class="slide-caption">Image Courtesy: Damage Assessment, Remediation and Restoration Program</div>
+        </div>
+        <div class="slide-dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+        </div>
+    </div>
+    
+    <!-- Kil-Tone Slides -->
+    <div class="site-slides" id="kil-tone-slides" style="display: none;">
+        <div class="slide active">
+            <img src="images/kil-tone.jpg" alt="Former Kil-Tone site view 1">
+            <div class="slide-caption">Image courtesy: EPA</div>
+        </div>
+        <div class="slide">
+            <img src="images/kil-tone.webp" alt="Former Kil-Tone site view 2">
+            <div class="slide-caption">Image courtesy: EPA</div>
+        </div>
+        <div class="slide-dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+        </div>
+    </div>
+    
+    <!-- Diamond Alkali Slides -->
+    <div class="site-slides" id="diamond-alkali-slides" style="display: none;">
+        <div class="slide active">
+            <img src="images/diamond alkali.jpeg" alt="Diamond Alkali site view 1">
+            <div class="slide-caption">Image courtesy: EPA</div>
+        </div>
+        <div class="slide">
+            <img src="images/diamond-alkali.jpg" alt="Diamond Alkali site view 2">
+            <div class="slide-caption">Image courtesy: NJ Spotlight News/Michael Sol Warren</div>
+        </div>
+        <div class="slide-dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+        </div>
+    </div>
+</div>
             <!-- Scrolling text sections -->
             <div class="text-sections">
                 <!-- Site 1: Rolling Knolls LF -->
@@ -591,61 +622,91 @@ document.addEventListener('DOMContentLoaded', function () {
     const slideContainers = document.querySelectorAll('.site-slides');
     const slideshowContainer = document.getElementById('site-slideshow');
     
+    console.log("Slideshow script loaded");
+    
     const isMobile = window.innerWidth < 768 || 
                      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
-    // Set up automatic slideshow for each site
+    // Track active slideshows
+    let activeSlideIntervals = {};
+    
+    // Set up slideshow functionality for each site
     slideContainers.forEach(container => {
+        const containerId = container.id;
         const slides = container.querySelectorAll('.slide');
         const dots = container.querySelectorAll('.dot');
-        let currentSlideIndex = 0;
-        let slideInterval;
+        
+        console.log(`Setting up slideshow for ${containerId} with ${slides.length} slides`);
+        
+        if (slides.length <= 1) {
+            console.log(`Skipping slideshow for ${containerId} - not enough slides`);
+            return; // Skip if there's only one slide
+        }
         
         // Function to change slides
         function showSlide(index) {
             // Hide all slides
-            slides.forEach(slide => {
-                slide.classList.remove('active');
-            });
+            slides.forEach(slide => slide.classList.remove('active'));
             
             // Deactivate all dots
-            dots.forEach(dot => {
-                dot.classList.remove('active');
-            });
+            dots.forEach(dot => dot.classList.remove('active'));
             
             // Show the selected slide and activate its dot
             slides[index].classList.add('active');
-            dots[index].classList.add('active');
-            currentSlideIndex = index;
+            if (dots[index]) dots[index].classList.add('active');
+            
+            container.dataset.currentSlide = index;
         }
         
-        // Set up click events for dots
+        container.dataset.currentSlide = 0;
+        
         dots.forEach(dot => {
             dot.addEventListener('click', function() {
-                clearInterval(slideInterval);
                 const index = parseInt(this.getAttribute('data-index'));
                 showSlide(index);
-                startSlideshow();
+                
+                // Restart slideshow timer
+                restartSlideshow(containerId);
             });
         });
         
-        // Function to start automatic slideshow
-        function startSlideshow() {
-            slideInterval = setInterval(() => {
-                let nextIndex = (currentSlideIndex + 1) % slides.length;
-                showSlide(nextIndex);
-            }, 4000); // Change slide every 4 seconds
+        function nextSlide() {
+            const currentIndex = parseInt(container.dataset.currentSlide || 0);
+            const nextIndex = (currentIndex + 1) % slides.length;
+            showSlide(nextIndex);
         }
         
-        // Initialize slideshow
-        startSlideshow();
+        function startSlideshow() {
+            if (activeSlideIntervals[containerId]) {
+                clearInterval(activeSlideIntervals[containerId]);
+            }
+            
+            activeSlideIntervals[containerId] = setInterval(nextSlide, 4000); // Change slide every 4 seconds
+            console.log(`Started slideshow for ${containerId}`);
+        }
         
-        // Store functions on the container element for later use
+        function restartSlideshow() {
+            if (activeSlideIntervals[containerId]) {
+                clearInterval(activeSlideIntervals[containerId]);
+            }
+            startSlideshow();
+        }
+        
+        function stopSlideshow() {
+            if (activeSlideIntervals[containerId]) {
+                clearInterval(activeSlideIntervals[containerId]);
+                delete activeSlideIntervals[containerId];
+                console.log(`Stopped slideshow for ${containerId}`);
+            }
+        }
+        
         container.showSlide = showSlide;
         container.startSlideshow = startSlideshow;
-        container.stopSlideshow = function() {
-            clearInterval(slideInterval);
-        };
+        container.stopSlideshow = stopSlideshow;
+        
+        if (container.style.display !== 'none') {
+            startSlideshow();
+        }
     });
 
     function updateProgressBar() {
@@ -656,27 +717,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateSlidesBasedOnScroll() {
-        // Hide all slide containers first
-        slideContainers.forEach(container => {
-            container.style.display = 'none';
-            // Stop all slideshows
-            if (container.stopSlideshow) {
-                container.stopSlideshow();
-            }
-        });
-        
         let maxVisibility = 0;
         let mostVisibleSection = null;
 
         scrollyTexts.forEach(section => {
             const rect = section.getBoundingClientRect();
             
-            // Calculate how much of the section is visible in the viewport
             const visibleTop = Math.max(0, rect.top);
             const visibleBottom = Math.min(window.innerHeight, rect.bottom);
             const visibleHeight = Math.max(0, visibleBottom - visibleTop);
             
-            // Weight sections differently based on device
             let visibility;
             
             if (isMobile) {
@@ -697,53 +747,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (mostVisibleSection) {
             const slidesId = mostVisibleSection.getAttribute('data-slides');
-            const slidesContainer = document.getElementById(slidesId);
+            console.log(`Most visible section: ${mostVisibleSection.id}, slides: ${slidesId}`);
             
+            slideContainers.forEach(container => {
+                container.style.display = 'none';
+                container.stopSlideshow(); // Stop all slideshows
+            });
+            
+            const slidesContainer = document.getElementById(slidesId);
             if (slidesContainer) {
                 slidesContainer.style.display = 'block';
-                
-                // Restart the slideshow for this container
-                if (slidesContainer.startSlideshow) {
-                    slidesContainer.startSlideshow();
-                }
+                slidesContainer.startSlideshow(); // Start this slideshow
+                console.log(`Showing slides for ${slidesId}`);
             }
         }
     }
-    
-    function isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.bottom >= 0
-        );
-    }
 
-    // Add additional styles
-    const style = document.createElement('style');
-    style.textContent = `
-        .slide {
-            transition: opacity 0.5s ease-in-out;
-        }
-        
-        @media (max-width: 768px) {
-            .slideshow-container {
-                position: relative;
-                top: 0;
-                margin-bottom: 1rem;
-                height: 300px;
-            }
-        }
-    `;
-    document.head.appendChild(style);
-
-    // Set up event listeners
     window.addEventListener('scroll', function() {
         updateProgressBar();
         updateSlidesBasedOnScroll();
     });
     
-    // Initial check on page load
     updateProgressBar();
     updateSlidesBasedOnScroll();
+    
+    console.log("Slideshow initialization complete");
 });
 </script>
+</body>
+</html>
