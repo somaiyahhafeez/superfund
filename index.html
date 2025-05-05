@@ -479,37 +479,32 @@ p.subhead {
                 const progress = (scrollPosition / scrollHeight) * 100;
                 progressBar.style.width = `${progress}%`;
             }
-    
-            function updateVideoBasedOnScroll() {
-                const videoContainer = document.getElementById('site-video');
-                const containerTop = videoContainer.getBoundingClientRect().top;
-    
-                if (containerTop < window.innerHeight && containerTop > -videoContainer.offsetHeight) {
-                    let closestSection = null;
-                    let closestDistance = Infinity;
-    
-                    scrollyTexts.forEach(section => {
-                        const sectionTop = section.getBoundingClientRect().top;
-                        const sectionBottom = section.getBoundingClientRect().bottom;
-                        const sectionCenter = (sectionTop + sectionBottom) / 2;
-                        const distanceFromCenter = Math.abs(sectionCenter - (window.innerHeight / 2));
-    
-                        if (distanceFromCenter < closestDistance) {
-                            closestDistance = distanceFromCenter;
-                            closestSection = section;
-                        }
-                    });
-    
-                    if (closestSection) {
-                        const videoSrc = closestSection.getAttribute('data-video');
-                        if (sourceEl.getAttribute('src') !== videoSrc) {
-                            sourceEl.setAttribute('src', videoSrc);
-                            currentVideo.load();
-                            currentVideo.play().catch(e => console.warn("Video play error:", e));
-                        }
-                    }
-                }
-            }
+function updateVideoBasedOnScroll() {
+    const windowMidpoint = window.innerHeight / 2;
+
+    let closestSection = null;
+    let closestDistance = Infinity;
+
+    scrollyTexts.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const sectionCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(sectionCenter - windowMidpoint);
+
+        if (distance < closestDistance) {
+            closestDistance = distance;
+            closestSection = section;
+        }
+    });
+
+    if (closestSection) {
+        const videoSrc = closestSection.getAttribute('data-video');
+        if (sourceEl.getAttribute('src') !== videoSrc) {
+            sourceEl.setAttribute('src', videoSrc);
+            currentVideo.load();
+            currentVideo.play().catch(e => console.warn("Video play error:", e));
+        }
+    }
+}
     
             window.addEventListener('scroll', () => {
                 updateProgressBar();
