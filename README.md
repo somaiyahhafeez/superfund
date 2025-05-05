@@ -12,23 +12,7 @@ letters to campuses and student reports. FIRE also employs full fact-checking an
 
 ## Goals
 
-My goal is to analyze cases of campus deplatforming events over the years and learn more about how censorship has changed across higher education institutions. 
 
-Some questions that guided my exploratory data analysis were:
-
-1. Has censorship grown over the years? 
-
-2. Has there been an uptick in certain topics? 
-
-3. Is the Right of Left attempting to censor more? 
-    - who is more successful in their attempts?
-
-4. In what situations does the campus administration reinvite/relocate of offer remediation after a censorship attempt?
-
-In these times, when our First Amendment rights are constantly under threat and ideals of free speech don't mean what they used to, I believe that
-such a database and project will offer valuable insight into our political climate. For this project, the main aim is to practice my dynamic scraping skills, 
-collate a valuable database in an analyzable form and extract valuable insights from it. The context of the database, implication of censorship
-and the added dimensions of "who protested what" adds a layer of complexity in data analysis. I want to focus on clear but depthy reader-facing visuals.
 
 
 ## Frameworks Used
