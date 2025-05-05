@@ -238,9 +238,8 @@
 
 
 .scrollytelling {
-  position: relative;
+  background-color: var(--background);
   padding: 4rem 0;
-  background-color: #fff;
 }
 
 .scroll-container {
@@ -248,70 +247,40 @@
   gap: 2rem;
   max-width: 1300px;
   margin: 0 auto;
+  align-items: flex-start;
 }
+
 .sticky-image {
   position: sticky;
   top: 10vh;
   width: 45%;
-  height: auto;
-  max-height: 650px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-shrink: 0;
 }
 
 .sticky-image img {
   width: 100%;
   height: auto;
-  max-height: 100%;
   object-fit: cover;
   border-radius: 8px;
+  max-height: 500px;
 }
 
-
-
-.sticky-image .site-caption {
-  position: absolute;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.65);
-  color: #fff;
+.site-caption {
+  margin-top: 0.5rem;
   font-size: 0.85rem;
-  padding: 6px 12px;
-  width: 100%;
+  color: #555;
   text-align: center;
-}
-.scroll-container {
-  display: flex;
-  align-items: flex-start;
-  gap: 2rem;
-  max-width: 1300px;
-  margin: 0 auto;
+  font-style: italic;
 }
 
 .scroll-sections {
   width: 55%;
-  padding-top: 1rem;
 }
 
 .scroll-section {
-  background: var(--light-background);
-  padding: 1.5rem 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-}
-
-
-.scrollytelling {
-  background-color: var(--background);
-}
-
-
-
-.scroll-section {
-  min-height: 90vh;
+  min-height: unset;
   padding: 2rem;
-  margin-bottom: 5vh;
-  background: #fff;
+  background-color: var(--background);
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
