@@ -198,10 +198,23 @@
      min-width: 300px;
  }
 @media (max-width: 768px) {
-  .scroll-container {
-    flex-direction: column;
-    gap: 1rem;
-  }
+
+.scroll-container {
+  flex-direction: column;
+  display: flex;
+}
+
+.scroll-sections {
+  width: 100% !important;  
+}
+
+.scroll-section {
+  padding: 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: #fff;
+  box-shadow: none;
+}
 
   .sticky-image {
     width: 100%;
@@ -217,14 +230,7 @@
     border-radius: 0;
   }
 
-  .scroll-sections {
-    width: 100%;
-  }
 
-  .scroll-section {
-    padding: 1rem;
-    font-size: 1rem;
-  }
 
   .site-caption {
     text-align: center;
