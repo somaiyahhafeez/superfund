@@ -176,20 +176,29 @@
             margin: 0 auto;
         }
 
-        .chart-map-section {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            max-width: var(--content-max-width);
-            margin: 2rem auto;
-            padding: 0 var(--content-padding);
-        }
+       .chart-map-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: var(--content-max-width);
+  margin: 2rem auto;
+  padding: 0 var(--content-padding);
+}
 
-        .chart-wrapper {
-            flex: 1 1 48%;
-            min-width: 300px;
-        }
+.chart-wrapper {
+  flex: 1 1 48%;
+  min-width: 300px;
+  height: auto;
+}
+
+.datawrapper-chart {
+  width: 100% !important;
+  height: auto !important;
+  border: none;
+  display: block;
+}
+
 
         figcaption {
             text-align: center;
