@@ -197,7 +197,26 @@
      flex: 1 1 48%;
      min-width: 300px;
  }
- 
+ @media (max-width: 768px) {
+  .scroll-container {
+    flex-direction: column;
+  }
+
+  .sticky-image {
+    width: 100%;
+    max-height: none;
+    position: relative;
+  }
+
+  .scroll-sections {
+    width: 100%;
+  }
+
+  .scroll-section {
+    padding: 1.5rem 1rem; 
+  }
+}
+
  @media (max-width: 768px) {
      .chart-map-section {
          flex-direction: column;
