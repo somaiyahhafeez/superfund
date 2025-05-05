@@ -232,22 +232,63 @@ p.subhead {
             gap: 2rem;
         }
         
-
-        .video-container {
+        /* Slideshow container */
+        .slideshow-container {
             position: sticky;
             top: 2rem;
             width: 600px;
             height: 400px;
             z-index: 1;
             overflow: hidden;
-            background-color: #000;
+            background-color: #f1f1f1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
 
-        .video-container video {
+        /* Slides */
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
+        }
+
+        /* Navigation dots */
+        .slide-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: white;
         }
 
         .text-sections {
@@ -318,7 +359,7 @@ p.subhead {
                 flex-direction: column;
             }
             
-            .video-container {
+            .slideshow-container {
                 width: 100%;
                 height: 50vh;
                 position: relative;
@@ -338,6 +379,10 @@ p.subhead {
 
             .scrolly-text h2 {
                 font-size: 1.7rem;
+            }
+            
+            .slideshow-container {
+                height: 40vh;
             }
         }
     </style>
@@ -404,20 +449,84 @@ p.subhead {
 
         <h2> Some of New Jersey's most toxic sites </h2>
 
-        <!-- Updated Scrollytelling Section -->
+        <!-- Updated Scrollytelling Section with Image Slideshow -->
         <div class="scrollytelling-container">
-            <!-- Static video container on the side -->
-            <div class="video-container" id="site-video">
-                <video id="current-video" autoplay muted loop playsinline poster="/api/placeholder/1920/1080">
-                    <source src="videos/rolling-knolls.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+            <!-- Slideshow container on the side -->
+            <div class="slideshow-container" id="site-slideshow">
+                <!-- Each site will have its own set of slides -->
+                <!-- Rolling Knolls Slides -->
+                <div class="site-slides" id="rolling-knolls-slides">
+                    <div class="slide active">
+                        <img src="images/RKL1.png" alt="Rolling Knolls site view 1">
+                        <p>Image courtesy: Great Swap Watershed Association</p>
+
+                    </div>
+                    <div class="slide">
+                        <img src="images/RK2.png" alt="Rolling Knolls site view 2">
+                        <p>Image courtesy: Great Swap Watershed Association</p>
+
+                    </div>
+                    <div class="slide-dots">
+                        <span class="dot active" data-index="0"></span>
+                        <span class="dot" data-index="1"></span>
+                    </div>
+                </div>
+                
+                <!-- Cornell Dubilier Slides -->
+                <div class="site-slides" id="cornell-dubilier-slides" style="display: none;">
+                    <div class="slide active">
+                        <img src="images/Cornell1.jpg" alt="Cornell Dubilier site view 1">
+                        <p>Image Courtesy: Damage Assessment, Remediation and Restoration Program</p>
+                    </div>
+                    <div class="slide">
+                        <img src="images/cornell2.jpg" alt="Cornell Dubilier site view 2">
+                        <p>Image Courtesy: Damage Assessment, Remediation and Restoration Program</p>
+
+                    </div>
+                    <div class="slide-dots">
+                        <span class="dot active" data-index="0"></span>
+                        <span class="dot" data-index="1"></span>
+                    </div>
+                </div>
+                
+                <!-- Kil-Tone Slides -->
+                <div class="site-slides" id="kil-tone-slides" style="display: none;">
+                    <div class="slide active">
+                        <img src="images/kil-tone.jpg" alt="Former Kil-Tone site view 1">
+                        <p>Image courtesy:</p>
+                    </div>
+                    <div class="slide">
+                        <img src="images/kil-tone.jpg" alt="Former Kil-Tone site view 2">
+                        <p>Image courtesy:</p>
+
+                    </div>
+                    <div class="slide-dots">
+                        <span class="dot active" data-index="0"></span>
+                        <span class="dot" data-index="1"></span>
+                    </div>
+                </div>
+                
+                <!-- Diamond Alkali Slides -->
+                <div class="site-slides" id="diamond-alkali-slides" style="display: none;">
+                    <div class="slide active">
+                        <img src="images/diamond alkali.jpeg" alt="Diamond Alkali site view 1">
+                        <p>Image courtesy:</p>
+                    </div>
+                    <div class="slide">
+                        <img src="images/diamond-alkali.jpg" alt="Diamond Alkali site view 2">
+                        <p>Image courtesy: NJ Spotlight News/Michael Sol Warren</p>
+                    </div>
+                    <div class="slide-dots">
+                        <span class="dot active" data-index="0"></span>
+                        <span class="dot" data-index="1"></span>
+                    </div>
+                </div>
             </div>
             
             <!-- Scrolling text sections -->
             <div class="text-sections">
                 <!-- Site 1: Rolling Knolls LF -->
-                <div class="scrolly-text" id="rolling-knolls" data-video="videos/rolling-knolls.mp4">
+                <div class="scrolly-text" id="rolling-knolls" data-slides="rolling-knolls-slides">
                     <h2>Rolling Knolls LF</h2>
                     <p>Rolling Knolls Landfill site, in Chatham Township, is approximately 200-acre. During the 1930s through 1968 when it was used as a landfill, it received municipal solid waste, construction and demolition debris.</p>
                     <p>To Bill Kibler, Executive Director of the Great Swamp Watershed Association, calling the site a "landfill" is misleading—he insists it's more accurately described as a "dump."</p>
@@ -428,7 +537,7 @@ p.subhead {
                 </div>
                 
                 <!-- Site 2: Cornell Dubilier Electronics -->
-                <div class="scrolly-text" id="cornell-dubilier" data-video="videos/Cornell-dubilier.mp4">
+                <div class="scrolly-text" id="cornell-dubilier" data-slides="cornell-dubilier-slides">
                     <h2>Cornell Dubilier Electronics Inc.</h2>
                     <p>Cornell Dubilier, an electronic manufacturing company, used the 26-acre site from 1936 to 1962 to make electronic components.</p>
                     <p>Poor waste handling practices resulted in releases of PCBs and chlorinated volatile organic compounds (VOCs), primarily trichloroethylene (TCE). The soil, sediment and groundwater at the site were contaminated.</p>
@@ -438,7 +547,7 @@ p.subhead {
                 </div>
                 
                 <!-- Site 3: Former Kil-Tone Company -->
-                <div class="scrolly-text" id="kil-tone" data-video="videos/former-kil-tonne.mp4">
+                <div class="scrolly-text" id="kil-tone" data-slides="kil-tone-slides">
                     <h2>Former Kil-Tone Company</h2>
                     <p>The former Kil-Tone Company manufactured arsenic-based pesticides from the 1910s to late 1930s.</p>
                     <p>EPA has found elevated concentrations of arsenic and lead in soil on the former facility property.</p>
@@ -446,7 +555,7 @@ p.subhead {
                 </div>
                 
                 <!-- Site 4: Diamond Alkali Co. -->
-                <div class="scrolly-text" id="diamond-alkali" data-video="videos/Diamond-alkali-co.mp4">
+                <div class="scrolly-text" id="diamond-alkali" data-slides="diamond-alkali-slides">
                     <h2>Diamond Alkali Co.</h2>
                     <p>In Newark's Ironbound neighborhood is located Diamond Alkali Company, one of the most toxic sites in the U.S.</p>
                     <p>The site, a former chemical plant where cleanup is priced at $1.4 billion is one of the eleven in New Jersey State that constain uncontrolled toxic wastes.</p>
@@ -467,7 +576,7 @@ p.subhead {
             <p>The data for this story came from EPA's <a href="https://semspub.epa.gov/work/HQ/406089.pdf"> National Priorties List.</a> It was then cleaned and analyzed on pandas.</p>
             <p>After analyzing for the state counts, I merged the EPA data with geospatial data on zip code to add the population of the area where the site is located.</p>
             <p>I looked into the Human Exposure Dashboard on EPA's site and looked deeper into sites in New Jersey where the human exposure is defined as not under control. I started contacting environmental organizations, health department officals and residents of the area. This was the hardest part of the story as I wasn't able to speak with many people.</p>
-            <p>The charts and maps were made on DataWrapper and all videos are from Google Earth.</p>
+            <p>The charts and maps were made on DataWrapper and all photos are from site visits and EPA documentation.</p>
         </div>
 
     </main>
@@ -479,16 +588,66 @@ p.subhead {
 document.addEventListener('DOMContentLoaded', function () {
     const progressBar = document.querySelector('.scroll-progress');
     const scrollyTexts = document.querySelectorAll('.scrolly-text');
-    const currentVideo = document.getElementById('current-video');
-    const sourceEl = currentVideo.querySelector('source');
-    const videoContainer = document.getElementById('site-video');
+    const slideContainers = document.querySelectorAll('.site-slides');
+    const slideshowContainer = document.getElementById('site-slideshow');
     
     const isMobile = window.innerWidth < 768 || 
                      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
-    const videoQuality = isMobile ? 'low' : 'high';
-    console.log(`Device detected as ${isMobile ? 'mobile' : 'desktop'}, using ${videoQuality} quality`);
-    
+    // Set up automatic slideshow for each site
+    slideContainers.forEach(container => {
+        const slides = container.querySelectorAll('.slide');
+        const dots = container.querySelectorAll('.dot');
+        let currentSlideIndex = 0;
+        let slideInterval;
+        
+        // Function to change slides
+        function showSlide(index) {
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Deactivate all dots
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            // Show the selected slide and activate its dot
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlideIndex = index;
+        }
+        
+        // Set up click events for dots
+        dots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                clearInterval(slideInterval);
+                const index = parseInt(this.getAttribute('data-index'));
+                showSlide(index);
+                startSlideshow();
+            });
+        });
+        
+        // Function to start automatic slideshow
+        function startSlideshow() {
+            slideInterval = setInterval(() => {
+                let nextIndex = (currentSlideIndex + 1) % slides.length;
+                showSlide(nextIndex);
+            }, 4000); // Change slide every 4 seconds
+        }
+        
+        // Initialize slideshow
+        startSlideshow();
+        
+        // Store functions on the container element for later use
+        container.showSlide = showSlide;
+        container.startSlideshow = startSlideshow;
+        container.stopSlideshow = function() {
+            clearInterval(slideInterval);
+        };
+    });
+
     function updateProgressBar() {
         const scrollPosition = window.scrollY;
         const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -496,20 +655,16 @@ document.addEventListener('DOMContentLoaded', function () {
         progressBar.style.width = `${progress}%`;
     }
 
-    function updateVideoBasedOnScroll() {
-        if (isMobile) {
-            const containerRect = videoContainer.getBoundingClientRect();
-            const isContainerVisible = (
-                containerRect.top < window.innerHeight &&
-                containerRect.bottom > 0
-            );
-            
-            if (!isContainerVisible) {
-                if (!currentVideo.paused) currentVideo.pause();
-                return;
+    function updateSlidesBasedOnScroll() {
+        // Hide all slide containers first
+        slideContainers.forEach(container => {
+            container.style.display = 'none';
+            // Stop all slideshows
+            if (container.stopSlideshow) {
+                container.stopSlideshow();
             }
-        }
-      
+        });
+        
         let maxVisibility = 0;
         let mostVisibleSection = null;
 
@@ -541,38 +696,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (mostVisibleSection) {
-            const videoSrc = mostVisibleSection.getAttribute('data-video');
+            const slidesId = mostVisibleSection.getAttribute('data-slides');
+            const slidesContainer = document.getElementById(slidesId);
             
-            if (sourceEl.getAttribute('src') !== videoSrc) {
-                console.log("Switching to video:", videoSrc); // For debugging
+            if (slidesContainer) {
+                slidesContainer.style.display = 'block';
                 
-                currentVideo.style.opacity = 0;
-                
-                sourceEl.setAttribute('src', videoSrc);
-                
-                try {
-                    currentVideo.load();
-                    
-                    currentVideo.oncanplay = function() {
-                        currentVideo.style.opacity = 1;
-                        
-                        if (!isMobile || isElementInViewport(videoContainer)) {
-                            currentVideo.play().catch(e => {
-                                console.warn("Video play error:", e);
-                                // Show a fallback if video fails to play
-                                videoContainer.style.backgroundColor = "#000";
-                            });
-                        }
-                    };
-                    
-                    setTimeout(() => {
-                        if (currentVideo.style.opacity === "0") {
-                            currentVideo.style.opacity = 1;
-                        }
-                    }, 1000);
-                    
-                } catch (e) {
-                    console.error("Error loading video:", e);
+                // Restart the slideshow for this container
+                if (slidesContainer.startSlideshow) {
+                    slidesContainer.startSlideshow();
                 }
             }
         }
@@ -586,112 +718,32 @@ document.addEventListener('DOMContentLoaded', function () {
         );
     }
 
+    // Add additional styles
     const style = document.createElement('style');
     style.textContent = `
-        #current-video {
-            transition: opacity 0.3s ease;
+        .slide {
+            transition: opacity 0.5s ease-in-out;
         }
         
         @media (max-width: 768px) {
-            .video-container {
-                height: 40vh; /* Slightly shorter on mobile */
+            .slideshow-container {
+                position: relative;
+                top: 0;
                 margin-bottom: 1rem;
-            }
-            
-            /* Improve scrollytelling text readability on mobile */
-            .scrolly-text {
-                margin-bottom: 2rem;
-                padding: 1.25rem;
+                height: 300px;
             }
         }
     `;
     document.head.appendChild(style);
 
-    console.log("Found scrolly sections:", scrollyTexts.length);
+    // Set up event listeners
+    window.addEventListener('scroll', function() {
+        updateProgressBar();
+        updateSlidesBasedOnScroll();
+    });
     
-    if (!isMobile) {
-        scrollyTexts.forEach(section => {
-            console.log("Section:", section.id, "Video:", section.getAttribute('data-video'));
-            
-            const videoSrc = section.getAttribute('data-video');
-            if (videoSrc) {
-                const preloadLink = document.createElement('link');
-                preloadLink.rel = 'preload';
-                preloadLink.as = 'video';
-                preloadLink.href = videoSrc;
-                document.head.appendChild(preloadLink);
-            }
-        });
-    } else {
-        scrollyTexts.forEach(section => {
-            console.log("Section:", section.id, "Video:", section.getAttribute('data-video'));
-        });
-    }
-
+    // Initial check on page load
     updateProgressBar();
-    
-    setTimeout(updateVideoBasedOnScroll, 500);
-
-    let scrollTimeout;
-    window.addEventListener('scroll', () => {
-        updateProgressBar(); // Update progress bar immediately
-        
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(updateVideoBasedOnScroll, isMobile ? 100 : 50);
-    });
-
-    window.addEventListener('orientationchange', function() {
-        setTimeout(updateVideoBasedOnScroll, 300);
-    });
-
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        // Update mobile detection on resize
-        const wasMobile = isMobile;
-        isMobile = window.innerWidth < 768 || 
-                  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-                  
-        if (wasMobile !== isMobile) {
-            console.log(`Device view changed to ${isMobile ? 'mobile' : 'desktop'}`);
-        }
-        
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            updateProgressBar();
-            updateVideoBasedOnScroll();
-        }, 100);
-    });
-
-    if (isMobile) {
-        // IntersectionObserver to detect when video container enters/exits viewport
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    if (currentVideo.paused && currentVideo.readyState >= 2) {
-                        currentVideo.play().catch(e => console.warn("Video play error:", e));
-                    }
-                } else {
-                    if (!currentVideo.paused) {
-                        currentVideo.pause();
-                    }
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        observer.observe(videoContainer);
-    }
-
-    window.addEventListener("message", function (a) {
-        if (a.data["datawrapper-height"]) {
-            const e = document.querySelectorAll("iframe");
-            for (let t in a.data["datawrapper-height"])
-                for (let i = 0, r; r = e[i]; i++)
-                    if (r.contentWindow === a.source) {
-                        r.style.height = a.data["datawrapper-height"][t] + "px";
-                    }
-        }
-    });
+    updateSlidesBasedOnScroll();
 });
 </script>
-</body>
-</html>
